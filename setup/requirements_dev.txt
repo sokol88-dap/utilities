@@ -1,0 +1,6 @@
+-r ./requirements_test.txt
+
+pylint
+flake8
+black
+mypy
