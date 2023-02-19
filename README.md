@@ -31,7 +31,7 @@ Currently we support only PostgreDB. Parameters for setting connect to database:
 ```
 DB_SETTINGS__HOST = "127.0.0.1"
 DB_SETTINGS__PORT = 5432
-DB_SETTINGS__BD = "notifier"
+DB_SETTINGS__DB = "notifier"
 DB_SETTINGS__USER = "user"
 DB_SETTINGS__PASSWORD = "passowrd"
 ```
@@ -53,5 +53,20 @@ EMAIL_SETTINGS__TARGET_ADDRESS = "target@mail.com"
 This utility used like as job. So it's pass only once.
 Before run you also should create .env file with your parameters and place it next to docker-compose.yml 
 ```
-> docker-compose -f setup/docker-compose.yml up
+> docker-compose -f setup/docker-compose/docker-compose.yml up
 ```
+
+### **Using kubernetes**
+This utility used like as job. So it's pass only once by crone.
+First of all you need to create .env file with your parameters and place it next to kubernetes yamls
+
+Then if you try to use in local machine then Before run kubernates yamls you need to start minikube
+```
+> minikube start
+```
+
+After that you can go to k8s falder start kubernetes by bash script
+```
+> cd setup/k8s
+> ./start.sh
+``` 

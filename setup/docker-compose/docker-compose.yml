@@ -1,0 +1,24 @@
+version: "3.3"
+
+services:
+  main:
+    network_mode: "host"
+    image: notify_changed_ip:${NOTIFY_IP_VERSION:-latest}
+    restart: "no"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+    env_file: .env
+
+  db:
+    image: postgres:${DB_VERSION:-14.5}
+    restart: unless-stopped
+    command: -c synchronous_commit=off
+    environment:
+      POSTGRES_PASSWORD: ${DB_SETTINGS__PASSWORD:-postgres}
+      POSTGRES_USER: ${DB_SETTINGS__USER:-postgres}
+      POSTGRES_DB: ${DB_SETTINGS__DB:-postgres}
+    ports:
+      - 5432:5432

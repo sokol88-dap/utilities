@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: notify-changed-ip
+  namespace: utility
+spec:
+  # Run every day at 1:00 AM
+  schedule: "0 1 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: notify-changed-ip
+              image: sokol88/notify_changed_ip:latest
+              envFrom:
+                - secretRef:
+                    name: notify-secret
+          restartPolicy: Never
